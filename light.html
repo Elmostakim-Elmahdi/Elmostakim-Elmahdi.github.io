@@ -1,0 +1,23 @@
+---
+layout: default
+title: Lights and LEDs
+navigation: 22
+---
+<h2>{{ page.title }}</h2>
+
+<!-- ######################################################################  -->
+{% assign category = site.templates | where: "category", "light" %}
+{% assign type_group = category | group_by: 'type' %}
+{% assign type_grouped = type_group | sort: 'name' %}
+{% for group in type_grouped %}
+<BR>
+<h3><a id="{{ group.name | downcase }}"></a>{{group.name}}</h3>
+<table id="{{group.name}}" width="80%">
+    <tbody>
+    {% assign grouptitlesorted = group.items | sort_natural: 'title' %}     
+    {% for template in grouptitlesorted %}
+    {% include tablerow_standard.html %}
+    {% endfor %}
+</tbody>
+</table>
+{% endfor %}

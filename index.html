@@ -1,0 +1,72 @@
+---
+layout: page
+title: Tasmota Supported Devices Repository
+---
+<div class="container">
+    <div class="row">
+        <div class="column column-60">
+        <h3>Tasmota Supported Devices Repository</h3>
+        </div>
+        <div class="column column-40">
+            <span style="vertical-align: text-bottom;"><strong>{% assign counter = 0 %}{% for item in site.templates %}{% assign counter=counter | plus:1 %}{% endfor %}{{ counter }}</strong> supported devices submitted by you!</span>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="column">
+        ESP32-S2 templates can now be added as `templates2`. 
+        </div>
+    </div>
+    <div class="row row-100"><BR></div> -->
+
+    <div class="row row-100">
+    <div class="column">
+        <h4><a href="last_added.html">Recently added:</a></h4>
+        {% assign sorted = site.templates | sort: "date_added" | reverse %}
+        <table>
+            <tbody>
+                {% for template in sorted limit: 25 %}
+                {% include tablerow_index.html %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="column column-33">
+    <!-- <h4>Devices by type:</h4>
+    <a class="button button-grey" href="bulb.html">BULBS</a>
+    <a class="button button-grey" href="plug.html">PLUGS</a>
+    <a class="button button-grey" href="light.html">LIGHTS</a>
+    <a class="button button-grey" href="switch.html">SWITCHES</a> 
+    <a class="button button-grey" href="misc.html">MISCELLANEOUS</a>
+    <a class="button button-black" href="new.html">Add new template</a>  -->
+    <h4>Devices by electrical standard:</h4>
+    <a class="button button-grey" href="all.html">ALL DEVICES</a>
+    <br>
+    {% assign category = site.templates | where: "category", "plug" %}
+    {% assign standard_group = category | map: 'standard' | join: ',' | split: ',' | uniq | sort_natural %}
+    {% for std in standard_group %}
+    <a class="button button-small button-grey" href="{{ std }}.html">{{ std | upcase }}</a>
+    {% else %}
+    {% endfor %}
+    <BR>Light Bulbs by base:<BR>
+    {% assign category = site.templates | where: "category", "bulb" %}
+    {% assign standard_group = category | map: 'standard' | join: ',' | split: ',' | uniq | sort_natural %}
+    {% for std in standard_group %}
+    <a class="button button-small button-grey" href="{{ std }}.html">{{ std | upcase }}</a>
+    {% else %}
+    {% endfor %}
+    <br>
+    <span style="font-size:0.6em;">See <a href="/assets/plug_types.jpg" target="_blank">world map of plugs</a> and <a href="https://www.bulbs.com/learning/basechart.aspx" target="_blank">light bulb base list</a> for more information.</span>
+    <h4>Unsupportable devices:</h4>
+    <a class="button button-red button-small" href="unsupported.html">LIST ALL</a>
+    <a class="button button-black button-small" href="new-unsupported.html">ADD INCOMPATIBLE</a>
+    {% assign sorted = site.unsupported | sort: "date_added" | reverse %}
+    <table>
+        <tbody>
+            {% for template in sorted limit: 20 %}
+            {% include tablerow_index.html %}
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+<span style="font-size:0.6em;">As an Amazon Associate I earn from qualifying purchases from provided device links.</span> 

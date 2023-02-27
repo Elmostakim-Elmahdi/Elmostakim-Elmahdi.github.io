@@ -1,0 +1,51 @@
+---
+layout: default
+title: Global Devices
+---
+<h2>{{ page.title }}</h2>
+
+<!-- ######################################################################  -->
+{% assign standard_global = site.templates | where: "standard", "global" | sort_natural: 'title' %}
+{% assign standard = standard_global %}
+
+<h3>Plugs, Sockets & Power Strips</h3>
+<table id="Devices" width="80%">
+<tbody>
+{% assign plug = standard | where: "category", "plug" | sort_natural: 'title' %}
+{% for template in plug %}
+{% include tablerow.html %}
+{% endfor %}
+</tbody>
+</table>
+
+<!-- ######################################################################  -->
+<h3>Lights</h3>
+<table id="Devices" width="80%">
+<tbody>
+{% assign light = standard | where: "category", "light" | sort_natural: 'title' %}
+{% for template in light %}
+{% include tablerow.html %}
+{% endfor %}
+</tbody>
+</table>
+
+<!-- ######################################################################  -->
+<h3>Switches & Dimmers</h3>
+<table id="Devices" width="80%">
+<tbody>
+{% assign switch = standard | where: "category", "switch" | sort_natural: 'title' %}
+{% for template in switch %}
+{% include tablerow.html %}
+{% endfor %}
+</tbody>
+</table>
+<!-- ######################################################################  -->
+<h3>Miscellaneous</h3>
+<table id="Devices" width="80%">
+<tbody>
+{% assign misc = standard | where: "category", "misc" | sort_natural: 'title' %}
+{% for template in misc %}
+{% include tablerow.html %}
+{% endfor %}
+</tbody>
+</table>
